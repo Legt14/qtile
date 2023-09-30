@@ -274,7 +274,14 @@ screens = [
                 widget.GroupBox(
                     background=colors["Light Yellow"],
                     foreground=colors["Black"],
-                    fontsize=13,
+                    fontsize=15,
+                    borderwidth = 2,
+                    font = 'Firacode Nerd Font',
+                    block_highlight_text_color = colors["Magenta"],
+                    padding = 3,
+                    this_current_screen_border = "#6b58a7",
+                    this_screen_border = "#6b58a7"
+
                 ),
                 widget.Spacer(
                     length=2, background=colors["Light Yellow"], **rounded_left
