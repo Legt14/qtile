@@ -58,6 +58,9 @@ colors = {
     "Cyan": "#56b6c2",
     "Gutter Grey": "#4b5263",
     "Comment Grey": "#5c6370",
+    "Midnight Blue": "#003366",
+    "Smalt": "#033494",
+    "Orange": "#ff5f1f",
 }
 
 
@@ -175,7 +178,7 @@ for g, k in zip(groups, group_hotkeys):
         ]
     )
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=1, margin=6),
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=1, margin=8),
     layout.Max(),
     # layout.MonadTall(),
     # Try more layouts by unleashing below layouts.
@@ -225,6 +228,40 @@ back_slash = {"decorations": [PowerLineDecoration(path="back_slash", size=12)]}
 
 screens = [
     Screen(
+        bottom=bar.Bar(
+            [
+                widget.TextBox(
+                    text="",
+                    background=colors["Magenta"],
+                    foreground=colors["Black"],
+                    padding=10,
+                    fontsize=36,
+                ),
+                widget.Spacer(length=2, background=colors["Magenta"], **arrow_left),
+                widget.Net(
+                    padding=10,
+                    background=colors["Black"],
+                ),
+                widget.Spacer(length=2, background=colors["Black"], **arrow_left),
+                widget.Memory(
+                    format="RAM {MemPercent}%",
+                    background="#BC96E6",
+                    foreground=colors["Black"],
+                    padding=10,
+                    fontsize=14,
+                ),
+                widget.Spacer(length=2, background="#BC96E6", **arrow_left),
+                widget.CPU(
+                    padding=10,
+                    background=colors["Black"],
+                ),
+                widget.Spacer(length=1, background=colors["Black"], **arrow_left),
+                widget.Spacer(length=1, background="#BC96E6", **arrow_left),
+            ],
+            25,
+            margin=10,
+            background=colors["Black"],
+        ),
         top=bar.Bar(
             [
                 widget.TextBox(
@@ -251,13 +288,11 @@ screens = [
                 ),
                 widget.Spacer(length=1, background=colors["Dark Yellow"], **arrow_left),
                 widget.Spacer(length=400, background=colors["Black"], **rounded_right),
-                widget.Systray(
-                    background = "#6b58a7"
-                ),
-                widget.Spacer(length=2, background='#6b58a7', **rounded_right),
+                widget.Systray(background="#6b58a7"),
+                widget.Spacer(length=2, background="#6b58a7", **rounded_right),
                 widget.Clock(
                     background=colors["Blue"],
-                    format="󰥔 %H:%M",
+                    format=" %d/%m/%y 󰥔 %H:%M",
                     foreground=colors["Black"],
                     fontsize=14,
                 ),
@@ -268,17 +303,9 @@ screens = [
                     background=colors["Green"],
                     foreground=colors["Black"],
                     fontsize=14,
+                    padding=10,
                 ),
                 widget.Spacer(length=1, background=colors["Green"], **rounded_right),
-                widget.Memory(
-                    format="󰍛 {MemPercent}%",
-                    background=colors["Comment Grey"],
-                    padding=10,
-                    fontsize=14,
-                ),
-                widget.Spacer(
-                    length=2, background=colors["Comment Grey"], **rounded_right
-                ),
                 widget.QuickExit(
                     default_text="󰗼",
                     countdown_format="{}",
@@ -287,7 +314,7 @@ screens = [
                     padding=10,
                 ),
             ],
-            26,
+            28,
             margin=5,
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]  # Borders are magenta
