@@ -1,33 +1,7 @@
-# Copyright (c) 2010 Aldo Cortesi
-# Copyright (c) 2010, 2014 dequis
-# Copyright (c) 2012 Randall Ma
-# Copyright (c) 2012-2014 Tycho Andersen
-# Copyright (c) 2012 Craig Barnes
-# Copyright (c) 2013 horsik
-# Copyright (c) 2013 Tao Sauvage
-#
-# Permission is hereby granted, free of charge, to any person obtaining a copy
-# of this software and associated documentation files (the "Software"), to deal
-# in the Software without restriction, including without limitation the rights
-# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-# copies of the Software, and to permit persons to whom the Software is
-# furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-# SOFTWARE.
-
 import subprocess
 import os
 
-from libqtile import bar, layout, widget, extension, hook
+from libqtile import bar, layout, widget, hook
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 
@@ -41,8 +15,8 @@ terminal = "alacritty"
 
 @hook.subscribe.startup_once
 def autostart():
-    script = os.path.expanduser("~/.config/qtile/scripts/start.sh")
-    subprocess.call([script])
+    script = os.path.expanduser("~/.config/qtile/autostart.sh")
+    subprocess.Popen([script])
 
 
 colors = {
@@ -259,7 +233,7 @@ screens = [
                 widget.Spacer(length=1, background="#BC96E6", **arrow_left),
             ],
             25,
-            margin=10,
+            margin=5,
             background=colors["Black"],
         ),
         top=bar.Bar(
@@ -275,13 +249,12 @@ screens = [
                     background=colors["Light Yellow"],
                     foreground=colors["Black"],
                     fontsize=15,
-                    borderwidth = 2,
-                    font = 'Firacode Nerd Font',
-                    block_highlight_text_color = colors["Magenta"],
-                    padding = 3,
-                    this_current_screen_border = "#6b58a7",
-                    this_screen_border = "#6b58a7"
-
+                    borderwidth=2,
+                    font= 'Iosevka Term Nerd Font',
+                    block_highlight_text_color=colors["Magenta"],
+                    padding=3,
+                    this_current_screen_border="#6b58a7",
+                    this_screen_border="#6b58a7",
                 ),
                 widget.Spacer(
                     length=2, background=colors["Light Yellow"], **rounded_left
@@ -291,10 +264,11 @@ screens = [
                     background=colors["Dark Yellow"],
                     foreground=colors["Black"],
                     fontsize=13,
-                    padding=29,
+                    font= 'Iosevka Term Nerd Font',
+                    padding=20,
                 ),
                 widget.Spacer(length=1, background=colors["Dark Yellow"], **arrow_left),
-                widget.Spacer(length=400, background=colors["Black"], **rounded_right),
+                widget.Spacer(length=300, background=colors["Black"], **rounded_right),
                 widget.Systray(background="#6b58a7"),
                 widget.Spacer(length=2, background="#6b58a7", **rounded_right),
                 widget.Clock(
